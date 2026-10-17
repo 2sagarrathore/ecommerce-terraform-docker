@@ -1,0 +1,14 @@
+frontend_url = "http://13.234.113.72"
+frontend_url_port_3000 = "http://13.234.113.72:3000"
+health_endpoints = {
+  "all_services" = "http://13.234.113.72/api/status"
+  "frontend_health" = "http://13.234.113.72/health"
+}
+instance_id = "i-05f47627413ac11b3"
+instance_public_dns = "ec2-13-234-113-72.ap-south-1.compute.amazonaws.com"
+instance_public_ip = "13.234.113.72"
+public_subnet_id = "subnet-0e124d1e8ee18e061"
+security_group_id = "sg-0fcc9192f27c43745"
+ssh_command = "No key pair configured; set key_pair_name and allowed_ssh_cidr to enable SSH."
+verify_backends_command = "ssh ubuntu@13.234.113.72 'cat deployment-status.txt && docker ps'"
+vpc_id = "vpc-0b28f142d2d1b77d3"

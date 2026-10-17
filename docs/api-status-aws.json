@@ -1,0 +1,72 @@
+{
+    "frontend": {
+        "status": "up",
+        "port": 3000,
+        "message": "Frontend is Live"
+    },
+    "services": [
+        {
+            "key": "user",
+            "label": "User Service",
+            "port": 3001,
+            "url": "http://user-service:3001",
+            "status": "up",
+            "latencyMs": 8,
+            "detail": {
+                "service": "user",
+                "status": "healthy",
+                "port": 3001,
+                "uptimeSeconds": 67,
+                "timestamp": "2026-10-17T05:15:32.955Z"
+            }
+        },
+        {
+            "key": "products",
+            "label": "Products Service",
+            "port": 3002,
+            "url": "http://products-service:3002",
+            "status": "up",
+            "latencyMs": 6,
+            "detail": {
+                "service": "products",
+                "status": "healthy",
+                "port": 3002,
+                "uptimeSeconds": 67,
+                "timestamp": "2026-10-17T05:15:32.953Z"
+            }
+        },
+        {
+            "key": "orders",
+            "label": "Orders Service",
+            "port": 3003,
+            "url": "http://orders-service:3003",
+            "status": "up",
+            "latencyMs": 6,
+            "detail": {
+                "service": "orders",
+                "status": "healthy",
+                "port": 3003,
+                "uptimeSeconds": 66,
+                "timestamp": "2026-10-17T05:15:32.953Z"
+            }
+        },
+        {
+            "key": "cart",
+            "label": "Cart Service",
+            "port": 3004,
+            "url": "http://cart-service:3004",
+            "status": "up",
+            "latencyMs": 8,
+            "detail": {
+                "service": "cart",
+                "status": "healthy",
+                "port": 3004,
+                "uptimeSeconds": 66,
+                "timestamp": "2026-10-17T05:15:32.957Z"
+            }
+        }
+    ],
+    "healthy": 4,
+    "total": 4,
+    "timestamp": "2026-10-17T05:15:32.959Z"
+}

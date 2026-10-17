@@ -263,7 +263,56 @@ ssh ubuntu@<public-ip> 'sudo tail -f /var/log/shopkart-deploy.log'
 
 ---
 
-## 7. Tear down
+## 7. Deployment record — live run
+
+Deployed on 2026-10-17 to AWS account `111122223333`, region `ap-south-1`.
+`terraform apply` created 14 resources in about 30 seconds; user-data finished
+installing Docker and starting all five containers roughly 2 minutes later.
+
+| Output                | Value                                                 |
+| --------------------- | ----------------------------------------------------- |
+| `frontend_url`        | `http://13.234.113.72`                                 |
+| `instance_public_dns` | `ec2-13-234-113-72.ap-south-1.compute.amazonaws.com`   |
+| `instance_id`         | `i-05f47627413ac11b3`                                  |
+| `vpc_id`              | `vpc-0b28f142d2d1b77d3`                                |
+| `public_subnet_id`    | `subnet-0e124d1e8ee18e061`                             |
+| `security_group_id`   | `sg-0fcc9192f27c43745`                                 |
+| AMI                   | `ami-0644c826df601fd4f` (Ubuntu 22.04, x86_64)         |
+
+![Frontend running on EC2](docs/frontend-aws.jpg)
+
+Verification results:
+
+```
+GET http://13.234.113.72/              -> "Frontend is Live" homepage
+GET http://13.234.113.72/api/status    -> 4/4 backends healthy
+GET http://13.234.113.72:3000/health   -> HTTP 200
+GET http://13.234.113.72/api/user      -> 3 users
+GET http://13.234.113.72/api/products  -> 4 products
+GET http://13.234.113.72/api/orders    -> 3 orders
+GET http://13.234.113.72/api/cart      -> 2 carts
+
+Backend ports from the public internet (must be refused):
+  :3001 blocked   :3002 blocked   :3003 blocked   :3004 blocked
+```
+
+The last check confirms the security group is doing its job: 3001-3004 are
+reachable only from inside the group, while the frontend is public on 80
+and 3000. Raw captures are in [`docs/`](docs/).
+
+Published images (public, `linux/amd64` + `linux/arm64`):
+
+```
+saagarsaga/shopkart-user-service:1.0.0
+saagarsaga/shopkart-products-service:1.0.0
+saagarsaga/shopkart-orders-service:1.0.0
+saagarsaga/shopkart-cart-service:1.0.0
+saagarsaga/shopkart-frontend:1.0.0
+```
+
+---
+
+## 8. Tear down
 
 ```bash
 cd terraform
@@ -274,7 +323,7 @@ Everything is inside the dedicated VPC, so `destroy` leaves no stray resources.
 
 ---
 
-## 8. Troubleshooting
+## 9. Troubleshooting
 
 | Symptom                                 | Cause and fix                                                                                   |
 | --------------------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -293,7 +342,7 @@ Everything is inside the dedicated VPC, so `destroy` leaves no stray resources.
 
 ---
 
-## 9. Security and cost notes
+## 10. Security and cost notes
 
 - Backend ports 3001–3004 are reachable only from inside the security group;
   only 80 and 3000 are public.
@@ -306,7 +355,7 @@ Everything is inside the dedicated VPC, so `destroy` leaves no stray resources.
 
 ---
 
-## 10. Mapping to the evaluation criteria
+## 11. Mapping to the evaluation criteria
 
 | Criterion                                        | Marks | Where it is implemented                                                        |
 | ------------------------------------------------ | ----- | ------------------------------------------------------------------------------ |
