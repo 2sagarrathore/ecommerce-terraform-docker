@@ -1,0 +1,15 @@
+node_modules/
+npm-debug.log*
+.DS_Store
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+*.auto.tfvars
+crash.log
+
+# Secrets
+*.pem
+.env

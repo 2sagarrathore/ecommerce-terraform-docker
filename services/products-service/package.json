@@ -1,0 +1,13 @@
+{
+  "name": "products-service",
+  "version": "1.0.0",
+  "description": "Products service for the multi-service Node.js e-commerce application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "license": "MIT"
+}

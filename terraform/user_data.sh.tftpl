@@ -1,0 +1,155 @@
+#!/usr/bin/env bash
+# ---------------------------------------------------------------------------
+# EC2 user-data: installs Docker, pulls the five service images from Docker
+# Hub and runs them as containers on a private Docker network.
+# Rendered by Terraform; progress is logged to /var/log/shopkart-deploy.log.
+# ---------------------------------------------------------------------------
+set -euo pipefail
+
+LOG_FILE=/var/log/shopkart-deploy.log
+exec > >(tee -a "$${LOG_FILE}") 2>&1
+
+DOCKERHUB_USER="${dockerhub_username}"
+IMAGE_TAG="${image_tag}"
+NETWORK="${project_name}-net"
+FRONTEND_HOST_PORT="${frontend_host_port}"
+
+log() { echo "[$(date -Is)] $*"; }
+
+log "=== ShopKart deployment starting ==="
+
+# --- 1. Install Docker from the official Docker apt repository -------------
+export DEBIAN_FRONTEND=noninteractive
+
+log "Waiting for any running apt process to finish..."
+for _ in $(seq 1 60); do
+  if ! fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; then break; fi
+  sleep 5
+done
+
+log "Installing Docker prerequisites..."
+apt-get update -y
+apt-get install -y ca-certificates curl gnupg jq
+
+log "Adding the Docker apt repository..."
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+ARCH="$(dpkg --print-architecture)"
+CODENAME="$(. /etc/os-release && echo "$${VERSION_CODENAME}")"
+echo "deb [arch=$${ARCH} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $${CODENAME} stable" \
+  > /etc/apt/sources.list.d/docker.list
+
+log "Installing Docker Engine..."
+apt-get update -y
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+systemctl enable --now docker
+usermod -aG docker ubuntu || true
+log "Docker installed: $(docker --version)"
+
+# --- 2. Optional Docker Hub login (only when the images are private) -------
+%{ if dockerhub_token != "" ~}
+log "Logging in to Docker Hub as $${DOCKERHUB_USER}..."
+set +x
+echo "${dockerhub_token}" | docker login --username "$${DOCKERHUB_USER}" --password-stdin
+set -x
+%{ else ~}
+log "No Docker Hub token supplied; pulling public images anonymously."
+%{ endif ~}
+
+# --- 3. Private network for service-to-service DNS -------------------------
+docker network inspect "$${NETWORK}" >/dev/null 2>&1 || docker network create "$${NETWORK}"
+log "Docker network ready: $${NETWORK}"
+
+# --- 4. Pull all five images ----------------------------------------------
+IMAGES=(
+  "shopkart-user-service"
+  "shopkart-products-service"
+  "shopkart-orders-service"
+  "shopkart-cart-service"
+  "shopkart-frontend"
+)
+
+for image in "$${IMAGES[@]}"; do
+  log "Pulling $${DOCKERHUB_USER}/$${image}:$${IMAGE_TAG}..."
+  docker pull "$${DOCKERHUB_USER}/$${image}:$${IMAGE_TAG}"
+done
+
+# --- 5. Run the four backend services -------------------------------------
+# Each backend publishes its own port on the host (3001-3004). The security
+# group keeps those ports reachable only from inside the group.
+run_backend() {
+  local name="$1" port="$2"
+  log "Starting $${name} on port $${port}..."
+  docker rm -f "$${name}" >/dev/null 2>&1 || true
+  docker run -d \
+    --name "$${name}" \
+    --network "$${NETWORK}" \
+    --restart unless-stopped \
+    -e "PORT=$${port}" \
+    -p "$${port}:$${port}" \
+    "$${DOCKERHUB_USER}/shopkart-$${name}:$${IMAGE_TAG}"
+}
+
+run_backend user-service 3001
+run_backend products-service 3002
+run_backend orders-service 3003
+run_backend cart-service 3004
+
+# --- 6. Run the frontend --------------------------------------------------
+# Published on both the configured host port (80 by default) and 3000, and
+# pointed at the backends by their container names on the Docker network.
+log "Starting frontend..."
+docker rm -f frontend >/dev/null 2>&1 || true
+
+# Always publish 3000; add the configured host port too when it differs.
+PORT_ARGS=(-p "3000:3000")
+if [ "$${FRONTEND_HOST_PORT}" != "3000" ]; then
+  PORT_ARGS+=(-p "$${FRONTEND_HOST_PORT}:3000")
+fi
+
+docker run -d \
+  --name frontend \
+  --network "$${NETWORK}" \
+  --restart unless-stopped \
+  -e "PORT=3000" \
+  -e "USER_SERVICE_URL=http://user-service:3001" \
+  -e "PRODUCTS_SERVICE_URL=http://products-service:3002" \
+  -e "ORDERS_SERVICE_URL=http://orders-service:3003" \
+  -e "CART_SERVICE_URL=http://cart-service:3004" \
+  "$${PORT_ARGS[@]}" \
+  "$${DOCKERHUB_USER}/shopkart-frontend:$${IMAGE_TAG}"
+
+# --- 7. Smoke test --------------------------------------------------------
+STATUS_FILE=/home/ubuntu/deployment-status.txt
+log "Waiting for the services to answer their health checks..."
+
+check() {
+  local label="$1" url="$2"
+  for _ in $(seq 1 30); do
+    if curl -fsS --max-time 3 "$${url}" >/dev/null 2>&1; then
+      echo "OK      $${label}  ($${url})"
+      return 0
+    fi
+    sleep 2
+  done
+  echo "FAILED  $${label}  ($${url})"
+  return 1
+}
+
+{
+  echo "ShopKart deployment status - $(date -Is)"
+  echo "-------------------------------------------"
+  check "user-service    " "http://localhost:3001/health" || true
+  check "products-service" "http://localhost:3002/health" || true
+  check "orders-service  " "http://localhost:3003/health" || true
+  check "cart-service    " "http://localhost:3004/health" || true
+  check "frontend        " "http://localhost:$${FRONTEND_HOST_PORT}/health" || true
+  echo
+  echo "Containers:"
+  docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}'
+} | tee "$${STATUS_FILE}"
+
+chown ubuntu:ubuntu "$${STATUS_FILE}" || true
+log "=== ShopKart deployment finished ==="

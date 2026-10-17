@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShopKart — Frontend is Live</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --border: #e3e6ea;
+    --text: #15181d;
+    --muted: #646b76;
+    --accent: #2f6fed;
+    --up: #17804a;
+    --up-bg: #e7f6ed;
+    --down: #b3261e;
+    --down-bg: #fdecea;
+    --code-bg: #f1f3f6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #11141a;
+      --panel: #181c23;
+      --border: #2a3039;
+      --text: #e8eaee;
+      --muted: #98a1ad;
+      --accent: #6b9bff;
+      --up: #5ddb95;
+      --up-bg: #11301f;
+      --down: #ff9b92;
+      --down-bg: #351512;
+      --code-bg: #10131a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 32px 16px 64px;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 32px; }
+  .live {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--up-bg); color: var(--up);
+    border: 1px solid color-mix(in srgb, var(--up) 30%, transparent);
+    padding: 8px 16px; border-radius: 999px;
+    font-weight: 650; font-size: 15px; letter-spacing: .01em;
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: currentColor; animation: pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
+  h1 { margin: 18px 0 6px; font-size: 30px; letter-spacing: -.02em; }
+  .sub { color: var(--muted); margin: 0; font-size: 15px; }
+  .summary {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    margin-top: 18px; color: var(--muted); font-size: 14px;
+  }
+  .summary span { background: var(--panel); border: 1px solid var(--border); padding: 5px 12px; border-radius: 8px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px;
+  }
+  .card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .card h2 { margin: 0; font-size: 17px; font-weight: 640; }
+  .pill { font-size: 12px; font-weight: 650; padding: 3px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; }
+  .pill.up { background: var(--up-bg); color: var(--up); }
+  .pill.down { background: var(--down-bg); color: var(--down); }
+  .pill.wait { background: var(--code-bg); color: var(--muted); }
+  .meta { color: var(--muted); font-size: 13px; margin: 10px 0 14px; }
+  .meta code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+  button {
+    font: inherit; font-size: 14px; font-weight: 550;
+    background: transparent; color: var(--accent);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 7px 14px; cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); }
+  pre {
+    margin: 12px 0 0; padding: 12px; max-height: 220px; overflow: auto;
+    background: var(--code-bg); border-radius: 8px;
+    font-size: 12px; line-height: 1.45; white-space: pre-wrap; word-break: break-word;
+  }
+  pre:empty { display: none; }
+  footer { margin-top: 32px; text-align: center; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="live"><span class="dot"></span> Frontend is Live</div>
+    <h1>ShopKart &mdash; Multi-Service E-commerce</h1>
+    <p class="sub">Five Dockerized Node.js services on an EC2 instance provisioned with Terraform.</p>
+    <div class="summary">
+      <span id="host">Host: &hellip;</span>
+      <span id="count">Backends: &hellip;</span>
+      <span id="stamp">Checked: &hellip;</span>
+    </div>
+  </header>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>Frontend on port 3000 (published as :80) &middot; backends on 3001&ndash;3004 over the private Docker network</footer>
+</div>
+
+<script>
+  const grid = document.getElementById('grid');
+  const cards = new Map();
+
+  function card(service) {
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML = `
+      <div class="card-top">
+        <h2>${service.label}</h2>
+        <span class="pill wait" data-pill>checking</span>
+      </div>
+      <p class="meta" data-meta>port <code>${service.port}</code></p>
+      <button data-btn>View sample data</button>
+      <pre data-out></pre>`;
+    el.querySelector('[data-btn]').addEventListener('click', async (event) => {
+      const out = el.querySelector('[data-out]');
+      event.target.disabled = true;
+      out.textContent = 'Loading…';
+      try {
+        const response = await fetch(`/api/${service.key}`);
+        out.textContent = JSON.stringify(await response.json(), null, 2);
+      } catch (error) {
+        out.textContent = `Request failed: ${error.message}`;
+      } finally {
+        event.target.disabled = false;
+      }
+    });
+    grid.appendChild(el);
+    return el;
+  }
+
+  async function refresh() {
+    let data;
+    try {
+      data = await (await fetch('/api/status')).json();
+    } catch (error) {
+      document.getElementById('stamp').textContent = 'Checked: status request failed';
+      return;
+    }
+
+    document.getElementById('host').textContent = `Host: ${location.host}`;
+    document.getElementById('count').textContent = `Backends: ${data.healthy}/${data.total} healthy`;
+    document.getElementById('stamp').textContent = `Checked: ${new Date(data.timestamp).toLocaleTimeString()}`;
+
+    for (const service of data.services) {
+      if (!cards.has(service.key)) cards.set(service.key, card(service));
+      const el = cards.get(service.key);
+      const pill = el.querySelector('[data-pill]');
+      pill.className = `pill ${service.status === 'up' ? 'up' : 'down'}`;
+      pill.textContent = service.status === 'up' ? 'running' : 'unreachable';
+      el.querySelector('[data-meta]').innerHTML = service.status === 'up'
+        ? `port <code>${service.port}</code> &middot; ${service.latencyMs} ms &middot; up ${service.detail.uptimeSeconds}s`
+        : `port <code>${service.port}</code> &middot; ${service.detail.error || 'no response'}`;
+    }
+  }
+
+  refresh();
+  setInterval(refresh, 5000);
+</script>
+</body>
+</html>
