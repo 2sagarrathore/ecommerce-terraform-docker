@@ -1,0 +1,13 @@
+-----------------------------------------------------------------------------------------------------------------------------
+|                                                DescribeSecurityGroupRules                                                 |
++-------------------+-------------------------------------------+---------+-------+--------+-----------------------+--------+
+|       CIDR        |                   Desc                    | Egress  | From  | Proto  |         SrcSG         |  To    |
++-------------------+-------------------------------------------+---------+-------+--------+-----------------------+--------+
+|  None             |  Internal access to the user service      |  False  |  3001 |  tcp   |  sg-0fcc9192f27c43745 |  3001  |
+|  203.0.113.4/32|  Frontend on its native port 3000         |  False  |  3000 |  tcp   |  None                 |  3000  |
+|  203.0.113.4/32|  HTTP to the frontend container           |  False  |  80   |  tcp   |  None                 |  80    |
+|  0.0.0.0/0        |  Allow all outbound traffic               |  True   |  -1   |  -1    |  None                 |  -1    |
+|  None             |  Internal access to the products service  |  False  |  3002 |  tcp   |  sg-0fcc9192f27c43745 |  3002  |
+|  None             |  Internal access to the orders service    |  False  |  3003 |  tcp   |  sg-0fcc9192f27c43745 |  3003  |
+|  None             |  Internal access to the cart service      |  False  |  3004 |  tcp   |  sg-0fcc9192f27c43745 |  3004  |
++-------------------+-------------------------------------------+---------+-------+--------+-----------------------+--------+

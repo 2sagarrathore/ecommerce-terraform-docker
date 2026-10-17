@@ -1,0 +1,198 @@
+{
+    "SecurityGroupRules": [
+        {
+            "SecurityGroupRuleId": "sgr-0ee6968a9acffe4b9",
+            "GroupId": "sg-0fcc9192f27c43745",
+            "GroupOwnerId": "111122223333",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 3001,
+            "ToPort": 3001,
+            "ReferencedGroupInfo": {
+                "GroupId": "sg-0fcc9192f27c43745",
+                "UserId": "111122223333"
+            },
+            "Description": "Internal access to the user service",
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "shopkart"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev"
+                },
+                {
+                    "Key": "ManagedBy",
+                    "Value": "Terraform"
+                }
+            ],
+            "SecurityGroupRuleArn": "arn:aws:ec2:ap-south-1:111122223333:security-group-rule/sgr-0ee6968a9acffe4b9"
+        },
+        {
+            "SecurityGroupRuleId": "sgr-06da7f8a4153ebeb0",
+            "GroupId": "sg-0fcc9192f27c43745",
+            "GroupOwnerId": "111122223333",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 3000,
+            "ToPort": 3000,
+            "CidrIpv4": "203.0.113.4/32",
+            "Description": "Frontend on its native port 3000",
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "shopkart"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev"
+                },
+                {
+                    "Key": "ManagedBy",
+                    "Value": "Terraform"
+                }
+            ],
+            "SecurityGroupRuleArn": "arn:aws:ec2:ap-south-1:111122223333:security-group-rule/sgr-06da7f8a4153ebeb0"
+        },
+        {
+            "SecurityGroupRuleId": "sgr-048d275e667c5c8b8",
+            "GroupId": "sg-0fcc9192f27c43745",
+            "GroupOwnerId": "111122223333",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 80,
+            "ToPort": 80,
+            "CidrIpv4": "203.0.113.4/32",
+            "Description": "HTTP to the frontend container",
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "shopkart"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev"
+                },
+                {
+                    "Key": "ManagedBy",
+                    "Value": "Terraform"
+                }
+            ],
+            "SecurityGroupRuleArn": "arn:aws:ec2:ap-south-1:111122223333:security-group-rule/sgr-048d275e667c5c8b8"
+        },
+        {
+            "SecurityGroupRuleId": "sgr-0642faa903be0c8bd",
+            "GroupId": "sg-0fcc9192f27c43745",
+            "GroupOwnerId": "111122223333",
+            "IsEgress": true,
+            "IpProtocol": "-1",
+            "FromPort": -1,
+            "ToPort": -1,
+            "CidrIpv4": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic",
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "shopkart"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev"
+                },
+                {
+                    "Key": "ManagedBy",
+                    "Value": "Terraform"
+                }
+            ],
+            "SecurityGroupRuleArn": "arn:aws:ec2:ap-south-1:111122223333:security-group-rule/sgr-0642faa903be0c8bd"
+        },
+        {
+            "SecurityGroupRuleId": "sgr-031cc295f3497993e",
+            "GroupId": "sg-0fcc9192f27c43745",
+            "GroupOwnerId": "111122223333",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 3002,
+            "ToPort": 3002,
+            "ReferencedGroupInfo": {
+                "GroupId": "sg-0fcc9192f27c43745",
+                "UserId": "111122223333"
+            },
+            "Description": "Internal access to the products service",
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "shopkart"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev"
+                },
+                {
+                    "Key": "ManagedBy",
+                    "Value": "Terraform"
+                }
+            ],
+            "SecurityGroupRuleArn": "arn:aws:ec2:ap-south-1:111122223333:security-group-rule/sgr-031cc295f3497993e"
+        },
+        {
+            "SecurityGroupRuleId": "sgr-06d7ff0b9c224c961",
+            "GroupId": "sg-0fcc9192f27c43745",
+            "GroupOwnerId": "111122223333",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 3003,
+            "ToPort": 3003,
+            "ReferencedGroupInfo": {
+                "GroupId": "sg-0fcc9192f27c43745",
+                "UserId": "111122223333"
+            },
+            "Description": "Internal access to the orders service",
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "shopkart"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev"
+                },
+                {
+                    "Key": "ManagedBy",
+                    "Value": "Terraform"
+                }
+            ],
+            "SecurityGroupRuleArn": "arn:aws:ec2:ap-south-1:111122223333:security-group-rule/sgr-06d7ff0b9c224c961"
+        },
+        {
+            "SecurityGroupRuleId": "sgr-09e965e91fa613814",
+            "GroupId": "sg-0fcc9192f27c43745",
+            "GroupOwnerId": "111122223333",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 3004,
+            "ToPort": 3004,
+            "ReferencedGroupInfo": {
+                "GroupId": "sg-0fcc9192f27c43745",
+                "UserId": "111122223333"
+            },
+            "Description": "Internal access to the cart service",
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "shopkart"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev"
+                },
+                {
+                    "Key": "ManagedBy",
+                    "Value": "Terraform"
+                }
+            ],
+            "SecurityGroupRuleArn": "arn:aws:ec2:ap-south-1:111122223333:security-group-rule/sgr-09e965e91fa613814"
+        }
+    ]
+}

@@ -296,7 +296,15 @@ Backend ports from the public internet (must be refused):
   :3001 blocked   :3002 blocked   :3003 blocked   :3004 blocked
 ```
 
-The last check confirms the security group is doing its job: 3001-3004 are
+**Full submission report:** [`docs/DEPLOYMENT-REPORT.pdf`](docs/DEPLOYMENT-REPORT.pdf)
+(13 pages — architecture, configuration walkthrough, screenshots, console logs and the
+rubric mapping). Raw evidence, including the EC2 serial-console log of the user-data run,
+is in [`docs/evidence/`](docs/evidence/).
+
+After the evidence above was captured, `allowed_http_cidr` was narrowed from
+`0.0.0.0/0` to a single `/32` so the frontend was not left open to the internet.
+
+The port check confirms the security group is doing its job: 3001-3004 are
 reachable only from inside the group, while the frontend is public on 80
 and 3000. Raw captures are in [`docs/`](docs/).
 

@@ -1,0 +1,407 @@
+Cloud-init v. 26.1-0ubuntu1~22.04.1 running 'init-local' at Sat, 17 Oct 2026 05:12:15 +0000. Up 4.66 seconds.
+Cloud-init v. 26.1-0ubuntu1~22.04.1 running 'init' at Sat, 17 Oct 2026 05:12:19 +0000. Up 7.98 seconds.
+ci-info: ++++++++++++++++++++++++++++++++++++++Net device info++++++++++++++++++++++++++++++++++++++
+ci-info: +--------+------+----------------------------+---------------+--------+-------------------+
+ci-info: | Device |  Up  |          Address           |      Mask     | Scope  |     Hw-Address    |
+ci-info: +--------+------+----------------------------+---------------+--------+-------------------+
+ci-info: |  ens5  | True |         10.20.1.86         | 255.255.255.0 | global | 02:ff:de:77:a6:c3 |
+ci-info: |  ens5  | True | fe80::ff:deff:fe77:a6c3/64 |       .       |  link  | 02:ff:de:77:a6:c3 |
+ci-info: |   lo   | True |         127.0.0.1          |   255.0.0.0   |  host  |         .         |
+ci-info: |   lo   | True |          ::1/128           |       .       |  host  |         .         |
+ci-info: +--------+------+----------------------------+---------------+--------+-------------------+
+ci-info: +++++++++++++++++++++++++++++Route IPv4 info+++++++++++++++++++++++++++++
+ci-info: +-------+-------------+-----------+-----------------+-----------+-------+
+ci-info: | Route | Destination |  Gateway  |     Genmask     | Interface | Flags |
+ci-info: +-------+-------------+-----------+-----------------+-----------+-------+
+ci-info: |   0   |   0.0.0.0   | 10.20.1.1 |     0.0.0.0     |    ens5   |   UG  |
+ci-info: |   1   |  10.20.0.2  | 10.20.1.1 | 255.255.255.255 |    ens5   |  UGH  |
+ci-info: |   2   |  10.20.1.0  |  0.0.0.0  |  255.255.255.0  |    ens5   |   U   |
+ci-info: |   3   |  10.20.1.1  |  0.0.0.0  | 255.255.255.255 |    ens5   |   UH  |
+ci-info: +-------+-------------+-----------+-----------------+-----------+-------+
+ci-info: +++++++++++++++++++Route IPv6 info+++++++++++++++++++
+ci-info: +-------+-------------+---------+-----------+-------+
+ci-info: | Route | Destination | Gateway | Interface | Flags |
+ci-info: +-------+-------------+---------+-----------+-------+
+ci-info: |   1   |  fe80::/64  |    ::   |    ens5   |   U   |
+ci-info: |   3   |    local    |    ::   |    ens5   |   U   |
+ci-info: |   4   |  multicast  |    ::   |    ens5   |   U   |
+ci-info: +-------+-------------+---------+-----------+-------+
+Generating public/private rsa key pair.
+Your identification has been saved in /etc/ssh/ssh_host_rsa_key
+Your public key has been saved in /etc/ssh/ssh_host_rsa_key.pub
+The key fingerprint is:
+SHA256:/ZPWKF3LRFXkEujPhkj1xeVJ3/ZEMSkr9lUOCg4eFEk root@ip-10-20-1-86
+The key's randomart image is:
++---[RSA 3072]----+
+|       oEo   ..*@|
+|        + . o.oBO|
+|       . + + o==O|
+|        ..oooo.=o|
+|        S.o.o++ .|
+|          .o.O+. |
+|          . B.+  |
+|           o .   |
+|                 |
++----[SHA256]-----+
+Generating public/private ecdsa key pair.
+Your identification has been saved in /etc/ssh/ssh_host_ecdsa_key
+Your public key has been saved in /etc/ssh/ssh_host_ecdsa_key.pub
+The key fingerprint is:
+SHA256:9NyKDUpEiGkiy0ZuKAbRINpOABg91XRZOVCoG029d+E root@ip-10-20-1-86
+The key's randomart image is:
++---[ECDSA 256]---+
+|X* +.+o oBo.     |
+|B+B ....+ +   .  |
+|O+o.  .+.  o . . |
+|+O   .o..o... E  |
+|= .   .oS o...   |
+|     ... + .     |
+|      . . o      |
+|                 |
+|                 |
++----[SHA256]-----+
+Generating public/private ed25519 key pair.
+Your identification has been saved in /etc/ssh/ssh_host_ed25519_key
+Your public key has been saved in /etc/ssh/ssh_host_ed25519_key.pub
+The key fingerprint is:
+SHA256:km0H+wSwq3rpwfVPcwRTrf9EwbqoV7C9YpzoglbT7c0 root@ip-10-20-1-86
+The key's randomart image is:
++--[ED25519 256]--+
+|      .     ...  |
+|       o   .  .o |
+|      . o o  .. .|
+|       + + +..  .|
+|      = S + *... |
+|   . o * = = +. .|
+|    +.o o O * .o |
+|   .o+ . = X E  .|
+|  .oo   o.+ .    |
++----[SHA256]-----+
+Cloud-init v. 26.1-0ubuntu1~22.04.1 running 'modules:config' at Sat, 17 Oct 2026 05:12:30 +0000. Up 17.36 seconds.
+Cloud-init v. 26.1-0ubuntu1~22.04.1 running 'modules:final' at Sat, 17 Oct 2026 05:12:31 +0000. Up 18.21 seconds.
+[2026-10-17T05:12:31+00:00] === ShopKart deployment starting ===
+[2026-10-17T05:12:31+00:00] Waiting for any running apt process to finish...
+[2026-10-17T05:12:31+00:00] Installing Docker prerequisites...
+Hit:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:3 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Get:4 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Get:5 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [14.1 MB]
+Get:6 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe Translation-en [5652 kB]
+Get:7 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 c-n-f Metadata [286 kB]
+Get:8 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [217 kB]
+Get:9 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/multiverse Translation-en [112 kB]
+Get:10 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/multiverse amd64 c-n-f Metadata [8372 B]
+Get:11 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [3908 kB]
+Get:12 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [576 kB]
+Get:13 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1289 kB]
+Get:14 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [326 kB]
+Get:15 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [30.8 kB]
+Get:16 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [86.1 kB]
+Get:17 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [16.6 kB]
+Get:18 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 c-n-f Metadata [756 B]
+Get:19 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [70.2 kB]
+Get:20 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [11.4 kB]
+Get:21 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/main amd64 c-n-f Metadata [412 B]
+Get:22 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:23 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [30.8 kB]
+Get:24 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.9 kB]
+Get:25 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [676 B]
+Get:26 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/multiverse amd64 c-n-f Metadata [116 B]
+Get:27 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [3642 kB]
+Get:28 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1054 kB]
+Get:29 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [237 kB]
+Get:30 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Metadata [23.2 kB]
+Get:31 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [79.6 kB]
+Get:32 http://security.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [13.7 kB]
+Get:33 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 c-n-f Metadata [544 B]
+Fetched 32.2 MB in 5s (6496 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+ca-certificates is already the newest version (20260601~22.04.1).
+ca-certificates set to manually installed.
+gnupg is already the newest version (2.2.27-3ubuntu2.5).
+gnupg set to manually installed.
+The following additional packages will be installed:
+  libcurl4 libjq1 libonig5
+The following NEW packages will be installed:
+  jq libjq1 libonig5
+The following packages will be upgraded:
+  curl libcurl4
+2 upgraded, 3 newly installed, 0 to remove and 16 not upgraded.
+Need to get 846 kB of archives.
+After this operation, 1087 kB of additional disk space will be used.
+Get:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 libonig5 amd64 6.9.7.1-2build1 [172 kB]
+Get:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libjq1 amd64 1.6-2.1ubuntu3.2 [135 kB]
+Get:3 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 jq amd64 1.6-2.1ubuntu3.2 [52.5 kB]
+Get:4 http://security.ubuntu.com/ubuntu jammy-security/main amd64 curl amd64 7.81.0-1ubuntu1.30 [194 kB]
+Get:5 http://security.ubuntu.com/ubuntu jammy-security/main amd64 libcurl4 amd64 7.81.0-1ubuntu1.30 [293 kB]
+Fetched 846 kB in 2s (482 kB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 66043 files and directories currently installed.)
+Preparing to unpack .../curl_7.81.0-1ubuntu1.30_amd64.deb ...
+Unpacking curl (7.81.0-1ubuntu1.30) over (7.81.0-1ubuntu1.29) ...
+Preparing to unpack .../libcurl4_7.81.0-1ubuntu1.30_amd64.deb ...
+Unpacking libcurl4:amd64 (7.81.0-1ubuntu1.30) over (7.81.0-1ubuntu1.29) ...
+Selecting previously unselected package libonig5:amd64.
+Preparing to unpack .../libonig5_6.9.7.1-2build1_amd64.deb ...
+Unpacking libonig5:amd64 (6.9.7.1-2build1) ...
+Selecting previously unselected package libjq1:amd64.
+Preparing to unpack .../libjq1_1.6-2.1ubuntu3.2_amd64.deb ...
+Unpacking libjq1:amd64 (1.6-2.1ubuntu3.2) ...
+Selecting previously unselected package jq.
+Preparing to unpack .../jq_1.6-2.1ubuntu3.2_amd64.deb ...
+Unpacking jq (1.6-2.1ubuntu3.2) ...
+Setting up libcurl4:amd64 (7.81.0-1ubuntu1.30) ...
+Setting up curl (7.81.0-1ubuntu1.30) ...
+Setting up libonig5:amd64 (6.9.7.1-2build1) ...
+Setting up libjq1:amd64 (1.6-2.1ubuntu3.2) ...
+Setting up jq (1.6-2.1ubuntu3.2) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.15) ...
+Running kernel seems to be up-to-date.
+No services need to be restarted.
+No containers need to be restarted.
+No user sessions are running outdated binaries.
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+[2026-10-17T05:13:28+00:00] Adding the Docker apt repository...
+[2026-10-17T05:13:28+00:00] Installing Docker Engine...
+Hit:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:3 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Get:4 https://download.docker.com/linux/ubuntu jammy InRelease [48.5 kB]
+Hit:5 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Get:6 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [90.4 kB]
+Fetched 139 kB in 1s (211 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  docker-ce-rootless-extras pigz
+Suggested packages:
+  cgroupfs-mount | cgroup-lite docker-model-plugin
+The following NEW packages will be installed:
+  containerd.io docker-buildx-plugin docker-ce docker-ce-cli
+  docker-ce-rootless-extras docker-compose-plugin pigz
+0 upgraded, 7 newly installed, 0 to remove and 16 not upgraded.
+Need to get 102 MB of archives.
+After this operation, 388 MB of additional disk space will be used.
+Get:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 pigz amd64 2.6-1 [63.6 kB]
+Get:2 https://download.docker.com/linux/ubuntu jammy/stable amd64 containerd.io amd64 2.4.2-2~ubuntu.22.04~jammy [23.3 MB]
+Get:3 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-ce-cli amd64 5:29.9.1-1~ubuntu.22.04~jammy [17.6 MB]
+Get:4 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-ce amd64 5:29.9.1-1~ubuntu.22.04~jammy [24.6 MB]
+Get:5 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-buildx-plugin amd64 0.38.0-1~ubuntu.22.04~jammy [17.8 MB]
+Get:6 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-ce-rootless-extras amd64 5:29.9.1-1~ubuntu.22.04~jammy [10.2 MB]
+Get:7 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-compose-plugin amd64 5.6.0-1~ubuntu.22.04~jammy [8081 kB]
+Fetched 102 MB in 1s (86.1 MB/s)
+Selecting previously unselected package containerd.io.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 66060 files and directories currently installed.)
+Preparing to unpack .../0-containerd.io_2.4.2-2~ubuntu.22.04~jammy_amd64.deb ...
+Unpacking containerd.io (2.4.2-2~ubuntu.22.04~jammy) ...
+Selecting previously unselected package docker-ce-cli.
+Preparing to unpack .../1-docker-ce-cli_5%3a29.9.1-1~ubuntu.22.04~jammy_amd64.deb ...
+Unpacking docker-ce-cli (5:29.9.1-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package docker-ce.
+Preparing to unpack .../2-docker-ce_5%3a29.9.1-1~ubuntu.22.04~jammy_amd64.deb ...
+Unpacking docker-ce (5:29.9.1-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package pigz.
+Preparing to unpack .../3-pigz_2.6-1_amd64.deb ...
+Unpacking pigz (2.6-1) ...
+Selecting previously unselected package docker-buildx-plugin.
+Preparing to unpack .../4-docker-buildx-plugin_0.38.0-1~ubuntu.22.04~jammy_amd64.deb ...
+Unpacking docker-buildx-plugin (0.38.0-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package docker-ce-rootless-extras.
+Preparing to unpack .../5-docker-ce-rootless-extras_5%3a29.9.1-1~ubuntu.22.04~jammy_amd64.deb ...
+Unpacking docker-ce-rootless-extras (5:29.9.1-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package docker-compose-plugin.
+Preparing to unpack .../6-docker-compose-plugin_5.6.0-1~ubuntu.22.04~jammy_amd64.deb ...
+Unpacking docker-compose-plugin (5.6.0-1~ubuntu.22.04~jammy) ...
+Setting up docker-buildx-plugin (0.38.0-1~ubuntu.22.04~jammy) ...
+Setting up containerd.io (2.4.2-2~ubuntu.22.04~jammy) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Setting up docker-compose-plugin (5.6.0-1~ubuntu.22.04~jammy) ...
+Setting up docker-ce-cli (5:29.9.1-1~ubuntu.22.04~jammy) ...
+Setting up pigz (2.6-1) ...
+Setting up docker-ce-rootless-extras (5:29.9.1-1~ubuntu.22.04~jammy) ...
+Setting up docker-ce (5:29.9.1-1~ubuntu.22.04~jammy) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /lib/systemd/system/docker.socket.
+Processing triggers for man-db (2.10.2-1) ...
+Running kernel seems to be up-to-date.
+No services need to be restarted.
+No containers need to be restarted.
+No user sessions are running outdated binaries.
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Synchronizing state of docker.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable docker
+[2026-10-17T05:14:01+00:00] Docker installed: Docker version 29.9.1, build dfc520d
+[2026-10-17T05:14:01+00:00] No Docker Hub token supplied; pulling public images anonymously.
+38649f0f89225c9f4c053fa307f87139813b578be5f234932ecc91bb26850e97
+[2026-10-17T05:14:01+00:00] Docker network ready: shopkart-net
+[2026-10-17T05:14:01+00:00] Pulling saagarsaga/shopkart-user-service:1.0.0...
+1.0.0: Pulling from saagarsaga/shopkart-user-service
+abd013f08044: Pulling fs layer
+6a0ac1617861: Pulling fs layer
+4feea04c1543: Pulling fs layer
+b2cbbfe903b0: Pulling fs layer
+fff4e2c1b189: Pulling fs layer
+86344443c634: Pulling fs layer
+316f22e88b2f: Pulling fs layer
+9e4422e81549: Pulling fs layer
+44136fa355b3: Download complete
+08101fb320f2: Download complete
+abd013f08044: Download complete
+6a0ac1617861: Download complete
+b2cbbfe903b0: Download complete
+6a0ac1617861: Pull complete
+4feea04c1543: Download complete
+fff4e2c1b189: Download complete
+86344443c634: Download complete
+9e4422e81549: Download complete
+316f22e88b2f: Download complete
+b2cbbfe903b0: Pull complete
+4feea04c1543: Pull complete
+fff4e2c1b189: Pull complete
+86344443c634: Pull complete
+316f22e88b2f: Pull complete
+abd013f08044: Pull complete
+9e4422e81549: Pull complete
+Digest: sha256:61d1da21147631ebee3b4b0922d751e7c80a0698a8b6d143a032b749c66dc39d
+Status: Downloaded newer image for saagarsaga/shopkart-user-service:1.0.0
+docker.io/saagarsaga/shopkart-user-service:1.0.0
+[2026-10-17T05:14:07+00:00] Pulling saagarsaga/shopkart-products-service:1.0.0...
+1.0.0: Pulling from saagarsaga/shopkart-products-service
+94fe1198d463: Pulling fs layer
+7ade2dd4e8dd: Pulling fs layer
+fff4e2c1b189: Pulling fs layer
+6a0ac1617861: Pulling fs layer
+4feea04c1543: Pulling fs layer
+b2cbbfe903b0: Pulling fs layer
+bca0ba8dcb84: Pulling fs layer
+86344443c634: Pulling fs layer
+44136fa355b3: Already exists
+4feea04c1543: Already exists
+b2cbbfe903b0: Already exists
+86344443c634: Already exists
+fff4e2c1b189: Already exists
+6a0ac1617861: Already exists
+9bb8ecfc2ab4: Download complete
+bca0ba8dcb84: Download complete
+bca0ba8dcb84: Pull complete
+7ade2dd4e8dd: Download complete
+94fe1198d463: Download complete
+7ade2dd4e8dd: Pull complete
+94fe1198d463: Pull complete
+Digest: sha256:cfc2d1b3fa5e016f7ddcfe7c241802c6f2bb0e69e8cb0e64ddc451bb754715e4
+Status: Downloaded newer image for saagarsaga/shopkart-products-service:1.0.0
+docker.io/saagarsaga/shopkart-products-service:1.0.0
+[2026-10-17T05:14:11+00:00] Pulling saagarsaga/shopkart-orders-service:1.0.0...
+1.0.0: Pulling from saagarsaga/shopkart-orders-service
+01eb27ab7cfb: Pulling fs layer
+b2cbbfe903b0: Pulling fs layer
+86344443c634: Pulling fs layer
+3f436f44f891: Pulling fs layer
+1e8a09cee2b2: Pulling fs layer
+fff4e2c1b189: Pulling fs layer
+6a0ac1617861: Pulling fs layer
+4feea04c1543: Pulling fs layer
+4feea04c1543: Already exists
+b2cbbfe903b0: Already exists
+86344443c634: Already exists
+fff4e2c1b189: Already exists
+6a0ac1617861: Already exists
+3f436f44f891: Download complete
+01eb27ab7cfb: Download complete
+44136fa355b3: Already exists
+1e8a09cee2b2: Download complete
+1e8a09cee2b2: Pull complete
+3f436f44f891: Pull complete
+01eb27ab7cfb: Pull complete
+8d106ff3508b: Download complete
+Digest: sha256:3a08149e96f0f11381ede86e9515c5b0bb00477c59f382b952d2b11e674b3df0
+Status: Downloaded newer image for saagarsaga/shopkart-orders-service:1.0.0
+docker.io/saagarsaga/shopkart-orders-service:1.0.0
+[2026-10-17T05:14:15+00:00] Pulling saagarsaga/shopkart-cart-service:1.0.0...
+1.0.0: Pulling from saagarsaga/shopkart-cart-service
+a797a6cc3e40: Pulling fs layer
+6a0ac1617861: Pulling fs layer
+fff4e2c1b189: Pulling fs layer
+86344443c634: Pulling fs layer
+4feea04c1543: Pulling fs layer
+c3f2ef7f75c1: Pulling fs layer
+b2cbbfe903b0: Pulling fs layer
+f0ba07e4b790: Pulling fs layer
+44136fa355b3: Already exists
+fff4e2c1b189: Already exists
+b2cbbfe903b0: Already exists
+6a0ac1617861: Already exists
+86344443c634: Already exists
+4feea04c1543: Already exists
+be567c9cfa83: Download complete
+a797a6cc3e40: Download complete
+f0ba07e4b790: Download complete
+c3f2ef7f75c1: Download complete
+c3f2ef7f75c1: Pull complete
+a797a6cc3e40: Pull complete
+f0ba07e4b790: Pull complete
+Digest: sha256:13c115e947a99cca4f2c23f368d240feb88057fca09784e6f8e50f8b64b40123
+Status: Downloaded newer image for saagarsaga/shopkart-cart-service:1.0.0
+docker.io/saagarsaga/shopkart-cart-service:1.0.0
+[2026-10-17T05:14:19+00:00] Pulling saagarsaga/shopkart-frontend:1.0.0...
+1.0.0: Pulling from saagarsaga/shopkart-frontend
+f79ce89cec9f: Pulling fs layer
+fff4e2c1b189: Pulling fs layer
+6a0ac1617861: Pulling fs layer
+86344443c634: Pulling fs layer
+4feea04c1543: Pulling fs layer
+622886899a0e: Pulling fs layer
+b2cbbfe903b0: Pulling fs layer
+ec9b27c4fc53: Pulling fs layer
+cf5ed33da163: Pulling fs layer
+fff4e2c1b189: Already exists
+6a0ac1617861: Already exists
+4feea04c1543: Already exists
+86344443c634: Already exists
+b2cbbfe903b0: Already exists
+44136fa355b3: Already exists
+f79ce89cec9f: Download complete
+e681c9d5c3f4: Download complete
+622886899a0e: Download complete
+622886899a0e: Pull complete
+cf5ed33da163: Download complete
+ec9b27c4fc53: Download complete
+f79ce89cec9f: Pull complete
+cf5ed33da163: Pull complete
+ec9b27c4fc53: Pull complete
+Digest: sha256:51abbfcd0d175eda99af5962c69948bd36328ba7208da55d296d9f531726c947
+Status: Downloaded newer image for saagarsaga/shopkart-frontend:1.0.0
+docker.io/saagarsaga/shopkart-frontend:1.0.0
+[2026-10-17T05:14:24+00:00] Starting user-service on port 3001...
+d5da70f987472c373a1bdff8480bff05044ed53bfbe8960afc61f98f45141211
+[2026-10-17T05:14:25+00:00] Starting products-service on port 3002...
+57bd6cd951d8df4afa60e1f0dcf7378d823d0ce9160fae29eac3a3767f07fc29
+[2026-10-17T05:14:26+00:00] Starting orders-service on port 3003...
+6aef7687d0ca91d116817b20045ce2e7a98540139ebd5640de47fa23c3969cbc
+[2026-10-17T05:14:26+00:00] Starting cart-service on port 3004...
+02edf011b2d129b1d426855c159ee1aa9318a25509caa1e385598a95c59db31e
+[2026-10-17T05:14:26+00:00] Starting frontend...
+8ca697d5b8a341d91439de25ccd994881b288403f640b7b8fe87d94bf2fce214
+[2026-10-17T05:14:27+00:00] Waiting for the services to answer their health checks...
+ShopKart deployment status - 2026-10-17T05:14:27+00:00
+-------------------------------------------
+OK      user-service      (http://localhost:3001/health)
+OK      products-service  (http://localhost:3002/health)
+OK      orders-service    (http://localhost:3003/health)
+OK      cart-service      (http://localhost:3004/health)
+OK      frontend          (http://localhost:80/health)
+Containers:
+NAMES              IMAGE                                        STATUS                                     PORTS
+frontend           saagarsaga/shopkart-frontend:1.0.0           Up Less than a second (health: starting)   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp, 0.0.0.0:80->3000/tcp, [::]:80->3000/tcp
+cart-service       saagarsaga/shopkart-cart-service:1.0.0       Up Less than a second (health: starting)   0.0.0.0:3004->3004/tcp, [::]:3004->3004/tcp
+orders-service     saagarsaga/shopkart-orders-service:1.0.0     Up 1 second (health: starting)             0.0.0.0:3003->3003/tcp, [::]:3003->3003/tcp
+products-service   saagarsaga/shopkart-products-service:1.0.0   Up 1 second (health: starting)             0.0.0.0:3002->3002/tcp, [::]:3002->3002/tcp
+user-service       saagarsaga/shopkart-user-service:1.0.0       Up 2 seconds (health: starting)            0.0.0.0:3001->3001/tcp, [::]:3001->3001/tcp
+[2026-10-17T05:14:27+00:00] === ShopKart deployment finished ===
+Cloud-init v. 26.1-0ubuntu1~22.04.1 finished at Sat, 17 Oct 2026 05:14:27 +0000. Datasource DataSourceEc2Local.  Up 134.30 seconds
