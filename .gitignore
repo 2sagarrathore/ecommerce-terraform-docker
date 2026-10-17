@@ -13,3 +13,4 @@ crash.log
 # Secrets
 *.pem
 .env
+tfplan*
